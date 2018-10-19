@@ -35,6 +35,6 @@ public class ScreenShake : MonoBehaviour {
 
 	void StopShaking(){
 		CancelInvoke("DoShake");
-		mainCamera.transform.localScale = Vector3.zero;
+        mainCamera.transform.localPosition = new Vector3(0, 0, mainCamera.transform.localPosition.z);
 	}
 }

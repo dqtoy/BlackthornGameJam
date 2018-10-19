@@ -25,9 +25,11 @@ public class Player_StompBug : MonoBehaviour {
     private bool isRunning = false;
     private bool isOnGround = false;
     private bool foot = false;
-    const int maxJumpNum = 0;
+    const int maxJumpNum = 1;
 	int jumpNum;
 
+    [Header("Skills")]
+    public RangedWeapon rangeWeapon;
 
     [Header("Visual Effects")]
 	public GameObject damageEffect;
@@ -66,7 +68,7 @@ public class Player_StompBug : MonoBehaviour {
                 }
 				anim.SetBool("isJumping", false);
 				foot = false;
-				Vector2 pos = new Vector2(transform.position.x, transform.position.y);
+				Vector2 pos = new Vector2(transform.position.x, transform.position.y - 0.7f);
 				Instantiate(footEffect, pos, Quaternion.identity);
 			}
 			anim.SetBool("isJumping", false);
@@ -85,17 +87,18 @@ public class Player_StompBug : MonoBehaviour {
 
 
 		// jump and double jump and triple jump
-		if (Input.GetKeyDown(KeyCode.UpArrow) && controller.collisions.below){
-			foot = true;
-			velocity.y = jumpVelocity;
+        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below){
+            Jump();
 		}
-		if (Input.GetKeyDown(KeyCode.UpArrow) && doubleJump == false && !controller.collisions.below){
+        /*
+        if (Input.GetKeyDown(KeyCode.Space) && doubleJump == false && !controller.collisions.below){
 			velocity.y = jumpVelocity;
 			jumpNum--;
 			if(jumpNum <= 0){
 				doubleJump = true;
 			}
 		} 
+		*/
 	
 
 
@@ -119,6 +122,35 @@ public class Player_StompBug : MonoBehaviour {
         }
 
 	}
+
+
+
+    /*****************************************
+     * 
+     * Actions
+     * 
+     *****************************************/
+
+    private void Jump()
+    {
+        foot = true;
+        velocity.y = jumpVelocity;
+    }
+
+    private void Attack()
+    {
+        
+    }
+
+    private void AttackMelee()
+    {
+        
+    }
+
+    private void AttackRange()
+    {
+        
+    }
 
     void UpdateTrailEffect()
     {
