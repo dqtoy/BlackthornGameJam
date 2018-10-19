@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/Main.unity
+    guid: e2b3cf7cf23b44348847d6ab263e52ed
+  - enabled: 1
+    path: Assets/Scenes/StompBug.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}

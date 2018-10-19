@@ -10,8 +10,8 @@ public class Player_StompBug : MonoBehaviour {
 	public float timeToJumpApex = .4f;
 	public float moveSpeed = 6;
 	
-    private float accelerationTimeAirborne = .2f;
-	private float accelerationTimeGrounded = .1f;
+    private float accelerationTimeAirborne = .4f;
+	private float accelerationTimeGrounded = .2f;
 	private float gravity;
 	private float jumpVelocity;
 	private Vector3 velocity;
@@ -68,7 +68,7 @@ public class Player_StompBug : MonoBehaviour {
                 }
 				anim.SetBool("isJumping", false);
 				foot = false;
-				Vector2 pos = new Vector2(transform.position.x, transform.position.y - 0.7f);
+				Vector2 pos = new Vector2(transform.position.x, transform.position.y - 0.6f);
 				Instantiate(footEffect, pos, Quaternion.identity);
 			}
 			anim.SetBool("isJumping", false);
@@ -87,7 +87,7 @@ public class Player_StompBug : MonoBehaviour {
 
 
 		// jump and double jump and triple jump
-        if (Input.GetKeyDown(KeyCode.Space) && controller.collisions.below){
+        if (Input.GetKey(KeyCode.Space) && controller.collisions.below){
             Jump();
 		}
         /*

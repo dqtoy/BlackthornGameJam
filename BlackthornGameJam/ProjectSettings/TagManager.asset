@@ -6,6 +6,7 @@ TagManager:
   tags:
   - FxTemporaire
   - Bug
+  - DeadZone
   layers:
   - Default
   - TransparentFX

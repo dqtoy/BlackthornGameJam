@@ -22,6 +22,11 @@ public class Projectile : MonoBehaviour {
         if (hitInfo.collider != null) {
             if (hitInfo.collider.CompareTag("Bug")) {
                 hitInfo.collider.GetComponent<Bug>().TakeDamage(1);
+                DestroyProjectile(true);
+            }
+
+            if (hitInfo.collider.CompareTag("InvisibleWall"))
+            {
                 DestroyProjectile();
             }
         }
@@ -30,8 +35,8 @@ public class Projectile : MonoBehaviour {
         transform.Translate(Vector2.up * speed * Time.deltaTime);
     }
 
-    void DestroyProjectile() {
-        if (destroyEffect != null)
+    void DestroyProjectile(bool playEffect = false) {
+        if (playEffect && destroyEffect != null)
             Instantiate(destroyEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

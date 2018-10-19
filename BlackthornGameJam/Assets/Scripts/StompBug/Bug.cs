@@ -2,6 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class BugData
+{
+    public float spawnTime;
+    public float speed;
+    public bool jumping;
+    public bool flying;
+    public bool fromLeft;
+
+    public BugData(float spawnTime, float speed, bool jumping = false, bool flying = false, bool fromLeft = false)
+    {
+        this.spawnTime = spawnTime;
+        this.speed = speed;
+        this.jumping = jumping;
+        this.flying = flying;
+        this.fromLeft = fromLeft;
+    }
+}
+
 public class Bug : MonoBehaviour {
     
     public int health;
@@ -40,6 +58,14 @@ public class Bug : MonoBehaviour {
             
             main = ps.main;
             main.startColor = color;
+        }
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DeadZone"))
+        {
+            Destroy(gameObject);
         }
     }
 }
