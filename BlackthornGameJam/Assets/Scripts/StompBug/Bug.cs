@@ -42,6 +42,9 @@ public class Bug : MonoBehaviour {
             GameObject effectObj = Instantiate(deathEffect, transform.position, Quaternion.identity);
             UpdateParticleColor(effectObj);
         }
+
+        BugUtils.KillBugOccur();
+
         Destroy(gameObject);
     }
 

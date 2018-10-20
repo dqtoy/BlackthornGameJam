@@ -13,21 +13,27 @@ public class GameManager_StompBug : MiniGameManagerBase {
     public Transform leftAirSpawn;
     public Transform rightAirSpawn;
 
+    private bool won = true;
     private bool gamePlaying;
     private float gameTime;
     private System.DateTime startTime;
     private int bugNum;
+    private int bugKilled;
     private int bulletNum;
     private List<BugData> bugs;
 
 	private void OnEnable()
 	{
         MiniGameTimerUI.OnTimeUp += OnTimeUp;
+        BugUtils.OnBugKilled += OnBugKilled;
+        PlayerUtils.OnPlayerDead += OnPlayerDead;
 	}
 
 	private void OnDisable()
 	{
         MiniGameTimerUI.OnTimeUp -= OnTimeUp;
+        BugUtils.OnBugKilled -= OnBugKilled;
+        PlayerUtils.OnPlayerDead -= OnPlayerDead;
 	}
 
 	private void Start()
@@ -43,17 +49,21 @@ public class GameManager_StompBug : MiniGameManagerBase {
         startTime = System.DateTime.Now;
         MiniGameTimerUI.Instance.StartTimer();
 
+        bugKilled = 0;
         SpawnBugs();
     }
 
     public override void EndGame()
     {
-        MainGameManager.Instance.FinishMiniGame("StompBug");
+        MainGameManager.Instance.FinishMiniGame(game, won);
     }
 
     public void OnTimeUp()
     {
         //play effect
+        if (won && bugKilled < bugNum)
+            won = false;
+        
         EndGame();
     }
 
@@ -85,6 +95,16 @@ public class GameManager_StompBug : MiniGameManagerBase {
             movementCtrl.Init(data.fromLeft, data.speed, spawnLocation.position.y, -1, -1);
         }
 
+    }
+
+    public void OnBugKilled()
+    {
+        bugKilled += 1;
+    }
+
+    private void OnPlayerDead()
+    {
+        won = false;
     }
 
     private void SetupTimer()

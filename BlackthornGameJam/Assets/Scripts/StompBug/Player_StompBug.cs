@@ -163,7 +163,8 @@ public class Player_StompBug : SingletonBehaviour<Player_StompBug> {
     {
         if (isDead)
             return;
-        
+
+        PlayerUtils.PlayerDeadOccur();
         velocity = new Vector2(-jumpVelocity / 8, jumpVelocity / 2);
         //anim.SetBool("isDead", true);
         //anim.Play("Dead");

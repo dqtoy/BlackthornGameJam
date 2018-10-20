@@ -13,12 +13,12 @@ public class LinearMove : MonoBehaviour {
     void Start()
     {
         speed = startSpeed * (movingRight ? 1 : -1);
-        Flip();
     }
 
     void Update()
     {
         transform.Translate(Vector2.right * speed * Time.deltaTime);
+        //Debug.Log(transform.localScale.x);
     }
 
     public void Init(bool movingRight, float movingSpeed)

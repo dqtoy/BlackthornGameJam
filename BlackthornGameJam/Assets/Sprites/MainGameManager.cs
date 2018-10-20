@@ -54,6 +54,11 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
         PlayMiniGame();
     }
 
+    private void GameLost()
+    {
+        SceneManager.LoadScene("GameLost", LoadSceneMode.Additive);
+    }
+
     /// <summary>
     /// play random mini game
     /// </summary>
@@ -77,11 +82,31 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
         }
     }
 
-    public void FinishMiniGame(string sceneName)
+    private void UnloadMiniGame(MiniGame game)
     {
-        SceneManager.UnloadSceneAsync(sceneName);
+        string sceneName = "";
+        switch (game)
+        {
+            case MiniGame.StompBug:
+                sceneName = "StompBug";
+                break;
+            case MiniGame.Pain:
+                sceneName = "StompBug";
+                break;
+            case MiniGame.Piano:
+                sceneName = "StompBug";
+                break;
+        }
 
-        StartCoroutine(PrepareForNextMiniGame());
+        SceneManager.UnloadSceneAsync(sceneName);
+    }
+
+    public void FinishMiniGame(MiniGame game, bool win)
+    {
+        UnloadMiniGame(game);
+
+        if (win)
+            StartCoroutine(PrepareForNextMiniGame());
     }
 
     IEnumerator PrepareForNextMiniGame()
@@ -89,6 +114,13 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
         yield return new WaitForSeconds(1.0f);
 
         PlayMiniGame();
+    }
+
+    IEnumerator LoadLost()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        GameLost();
     }
 
 
@@ -104,10 +136,12 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
 
     private void HandleInput_MiniGame()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Q))
         {
             FinishMiniGame("StompBug");
         }
+        */
     }
 
 
