@@ -19,6 +19,7 @@ public class FadeInOut : MonoBehaviour
     public float time = 1.5f;
     public float delay;
     public Ease easeType = Ease.Linear;
+    public bool pingPong = false;
 
     public UnityEvent callback;
 
@@ -49,7 +50,9 @@ public class FadeInOut : MonoBehaviour
     public void Play()
     {
         progress = valueFrom;
-        DOTween.To(() => progress, x => progress = x, valueTo, time).SetDelay(delay).SetEase(easeType).OnComplete(OnFinish);
+        if (pingPong)
+            DOTween.To(() => progress, x => progress = x, valueTo, time).SetDelay(delay).SetEase(easeType).SetLoops(-1, LoopType.Yoyo);
+        else DOTween.To(() => progress, x => progress = x, valueTo, time).SetDelay(delay).SetEase(easeType).OnComplete(OnFinish);
 
         playing = true;
     }
