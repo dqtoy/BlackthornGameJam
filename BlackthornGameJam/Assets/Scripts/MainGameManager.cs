@@ -28,6 +28,8 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
         miniLevels = new int[miniGameNum];
         System.Array.Clear(miniLevels, 0, miniLevels.Length);
         currentLevel = 0;
+
+        SceneManager.LoadScene("TitleScene", LoadSceneMode.Additive);
 	}
 
 	private void Update()

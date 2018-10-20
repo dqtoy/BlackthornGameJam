@@ -790,7 +790,7 @@ GameObject:
   - component: {fileID: 2141792985}
   - component: {fileID: 2141792986}
   m_Layer: 0
-  m_Name: MainGameManager
+  m_Name: RestartSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
