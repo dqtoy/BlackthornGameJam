@@ -115,7 +115,7 @@ public class GameManager_SmashpBug : MiniGameManagerBase {
         bugs = new List<BugData>();
 
         int health = Mathf.Min(2 + level, 15);
-        bugs.Add(new BugData(1.0f, 1, false, false, false, health));
+        bugs.Add(new BugData(1.0f, 1, false, false, (Random.value > 0.5f), health));
 
     }
 }
