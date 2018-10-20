@@ -116,15 +116,16 @@ public class GameManager_StompBug : MiniGameManagerBase {
         {
             bugNum = 3;
             bugs = new List<BugData>();
-            bugs.Add(new BugData(1, 6));
-            bugs.Add(new BugData(1.5f, 6));
+            bugs.Add(new BugData(1, 5));
+            bugs.Add(new BugData(1.5f, 5));
+            bugs.Add(new BugData(2f, 5));
         }
         else if (level > 3 && level < 8)
         {
-            int randomMode = Random.Range(0, 1);
+            int randomMode = Random.Range(0, 2);
             if (randomMode == 0)
             {
-                bugNum = Random.Range(2, 3);
+                bugNum = Random.Range(2, 4);
                 bugs = new List<BugData>();
                 for (int i = 0; i < bugNum; i++)
                     bugs.Add(new BugData(1.0f + Random.Range(0, 2.0f), Random.Range(3, 8), false, false, (Random.value > 0.5f)));
@@ -132,17 +133,17 @@ public class GameManager_StompBug : MiniGameManagerBase {
         }
         else if (level >= 8 && level < 15)
         {
-            int randomMode = Random.Range(0, 1);
+            int randomMode = Random.Range(0, 2);
             if (randomMode == 0)
             {
-                bugNum = Random.Range(2, 3);
+                bugNum = Random.Range(2, 4);
                 bugs = new List<BugData>();
                 for (int i = 0; i < bugNum; i++)
                     bugs.Add(new BugData(1.0f + Random.Range(0, 2.0f), Random.Range(3, 8), false, false, (Random.value > 0.5f)));
             }
             else if (randomMode == 1)
             {
-                bugNum = Random.Range(1, 2);
+                bugNum = Random.Range(1, 3);
                 bugs = new List<BugData>();
                 for (int i = 0; i < bugNum; i++)
                     bugs.Add(new BugData(1.0f + Random.Range(0, 2.0f), Random.Range(8, 12), false, false, (Random.value > 0.5f)));
@@ -150,17 +151,17 @@ public class GameManager_StompBug : MiniGameManagerBase {
         }
         else if (level >= 15)
         {
-            int randomMode = Random.Range(0, 1);
+            int randomMode = Random.Range(0, 2);
             if (randomMode == 0)
             {
-                bugNum = Random.Range(2, 3);
+                bugNum = Random.Range(2, 4);
                 bugs = new List<BugData>();
                 for (int i = 0; i < bugNum; i++)
                     bugs.Add(new BugData(1.0f + Random.Range(0, 2.0f), Random.Range(3, 8), false, false, (Random.value > 0.5f)));
             }
             else if (randomMode == 1)
             {
-                bugNum = Random.Range(1, 2);
+                bugNum = Random.Range(1, 3);
                 bugs = new List<BugData>();
                 for (int i = 0; i < bugNum; i++)
                     bugs.Add(new BugData(1.0f + Random.Range(0, 2.0f), Random.Range(8, 12), false, false, (Random.value > 0.5f)));

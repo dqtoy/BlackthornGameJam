@@ -59,7 +59,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     /// </summary>
     private void PlayMiniGame()
     {
-        int miniGameIndex = UnityEngine.Random.Range(0, 2);
+        int miniGameIndex = Random.Range(0, 3);
         miniGameIndex = 0;
         miniLevels[miniGameIndex]++;
         currentLevel++;
@@ -80,6 +80,15 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     public void FinishMiniGame(string sceneName)
     {
         SceneManager.UnloadSceneAsync(sceneName);
+
+        StartCoroutine(PrepareForNextMiniGame());
+    }
+
+    IEnumerator PrepareForNextMiniGame()
+    {
+        yield return new WaitForSeconds(1.0f);
+
+        PlayMiniGame();
     }
 
 
