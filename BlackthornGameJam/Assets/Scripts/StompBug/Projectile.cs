@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour {
                 DestroyProjectile(true);
             }
 
-            if (hitInfo.collider.CompareTag("InvisibleWall"))
+            if (hitInfo.collider.CompareTag("DeadZone"))
             {
                 DestroyProjectile();
             }

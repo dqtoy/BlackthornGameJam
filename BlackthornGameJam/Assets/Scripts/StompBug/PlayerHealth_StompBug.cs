@@ -16,6 +16,8 @@ public class PlayerHealth_StompBug : SingletonBehaviour<PlayerHealth_StompBug> {
 
     private void Dead()
     {
+        Debug.Log("Dead");
+        return;
         if (shake != null)
             shake.Shake(0.5f, 0.25f);
     }

@@ -31,8 +31,8 @@ public class SineMove : MonoBehaviour {
         this.movingRight = movingRight;
         this.startSpeed = movingSpeed;
         this.height = height;
-        this.waveSpeed = waveSpeed;
-        this.waveStrongness = waveStrongness;
+        this.waveSpeed = waveSpeed > 0 ? waveSpeed : this.waveSpeed;
+        this.waveStrongness = waveStrongness > 0 ? waveStrongness : this.waveStrongness;
         speed = startSpeed * (movingRight ? 1 : -1);
         Flip();
     }

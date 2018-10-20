@@ -19,6 +19,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     public GameState gameState = GameState.Title;
     public MiniGameManagerBase currentGame;
 
+    private int currentLevel;
     private const int miniGameNum = 3;
     private int[] miniLevels;
 
@@ -26,6 +27,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
 	{
         miniLevels = new int[miniGameNum];
         System.Array.Clear(miniLevels, 0, miniLevels.Length);
+        currentLevel = 0;
 	}
 
 	private void Update()
@@ -58,7 +60,9 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     private void PlayMiniGame()
     {
         int miniGameIndex = UnityEngine.Random.Range(0, 2);
+        miniGameIndex = 0;
         miniLevels[miniGameIndex]++;
+        currentLevel++;
         switch(miniGameIndex)
         {
             case 0:
@@ -73,7 +77,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
         }
     }
 
-    public void UnloadMiniGame(string sceneName)
+    public void FinishMiniGame(string sceneName)
     {
         SceneManager.UnloadSceneAsync(sceneName);
     }
@@ -93,17 +97,41 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            UnloadMiniGame("StompBug");
+            FinishMiniGame("StompBug");
         }
     }
 
 
+    public float GetMiniGameTime(int miniGameLevel)
+    {
+        if (miniGameLevel < 5)
+            return 5;
+        else if (miniGameLevel < 10)
+            return 4.5f;
+        else if (miniGameLevel < 15)
+            return 4;
+        else if (miniGameLevel < 20)
+            return 3.5f;
+        else if (miniGameLevel < 25)
+            return 3;
+        else if (miniGameLevel < 30)
+            return 2.5f;
+        else
+            return 2;
+    }
 
+
+
+    public int GetCurrentLevel()
+    {
+        return currentLevel;
+    }
 
 
 
     public int GetMiniGameLevel(MiniGame game)
     {
-        return miniLevels[(int)game];
+        int index = (int)game;
+        return miniLevels[index];
     }
 }
