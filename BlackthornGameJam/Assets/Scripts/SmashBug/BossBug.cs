@@ -23,7 +23,7 @@ public class BossBug : MonoBehaviour {
         float ratio = (float)healthLost / maxHealth;
         float sizeRadio = Mathf.Lerp(1, 2, ratio);
         transform.localScale = Vector3.one * initScale * sizeRadio;
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localScale.y * 0.9f, transform.localPosition.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localScale.y * 0.85f + 0.05f, transform.localPosition.z);
     }
 
     public void Init(int health)
