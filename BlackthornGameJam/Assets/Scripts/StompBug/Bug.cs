@@ -9,14 +9,16 @@ public class BugData
     public bool jumping;
     public bool flying;
     public bool fromLeft;
+    public int health;
 
-    public BugData(float spawnTime, float speed, bool jumping = false, bool flying = false, bool fromLeft = false)
+    public BugData(float spawnTime, float speed, bool jumping = false, bool flying = false, bool fromLeft = false, int health = 1)
     {
         this.spawnTime = spawnTime;
         this.speed = speed;
         this.jumping = jumping;
         this.flying = flying;
         this.fromLeft = fromLeft;
+        this.health = health;
     }
 }
 

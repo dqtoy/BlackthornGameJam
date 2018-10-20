@@ -10,7 +10,7 @@ public enum GameState
 
 public enum MiniGame
 {
-    StompBug = 0, Pain, Piano
+    StompBug = 0, SmashBug, Pain, Piano
 }
 
 
@@ -66,8 +66,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     /// </summary>
     private void PlayMiniGame()
     {
-        int miniGameIndex = Random.Range(0, 3);
-        miniGameIndex = 0;
+        int miniGameIndex = Random.Range(0, 2);
         miniLevels[miniGameIndex]++;
         currentLevel++;
         switch(miniGameIndex)
@@ -76,10 +75,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
                 SceneManager.LoadScene("StompBug", LoadSceneMode.Additive);
                 break;
             case 1:
-                SceneManager.LoadScene("StompBug", LoadSceneMode.Additive);
-                break;
-            case 2:
-                SceneManager.LoadScene("StompBug", LoadSceneMode.Additive);
+                SceneManager.LoadScene("SmashBug", LoadSceneMode.Additive);
                 break;
         }
     }
@@ -91,6 +87,9 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
         {
             case MiniGame.StompBug:
                 sceneName = "StompBug";
+                break;
+            case MiniGame.SmashBug:
+                sceneName = "SmashBug";
                 break;
             case MiniGame.Pain:
                 sceneName = "StompBug";
