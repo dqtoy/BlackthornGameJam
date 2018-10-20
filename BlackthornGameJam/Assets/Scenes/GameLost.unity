@@ -244,6 +244,7 @@ GameObject:
   - component: {fileID: 1587572423}
   - component: {fileID: 1587572422}
   - component: {fileID: 1587572421}
+  - component: {fileID: 1587572425}
   m_Layer: 0
   m_Name: TextMeshPro
   m_TagString: Untagged
@@ -258,7 +259,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1587572419}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -7.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1962127129}
@@ -297,8 +298,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
@@ -431,6 +432,31 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1587572419}
   m_Mesh: {fileID: 0}
+--- !u!114 &1587572425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1587572419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f656aa4c73b494a9cd3d3ff565a686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BG: {fileID: 0}
+  UIText: {fileID: 0}
+  sprite: {fileID: 0}
+  textMeshText: {fileID: 1587572421}
+  valueFrom: 0
+  valueTo: 1.5
+  time: 1.5
+  delay: 0
+  easeType: 8
+  callback:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1962127128
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +496,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1981522098}
   - component: {fileID: 1981522097}
+  - component: {fileID: 1981522099}
   m_Layer: 0
   m_Name: ScreenBG
   m_TagString: Untagged
@@ -530,12 +557,48 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1981522096}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0600003, y: -0.03, z: 5}
+  m_LocalPosition: {x: -0.0600003, y: -0.03, z: -7}
   m_LocalScale: {x: 3, y: 3, z: 0}
   m_Children: []
   m_Father: {fileID: 1962127129}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1981522099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1981522096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2f656aa4c73b494a9cd3d3ff565a686, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BG: {fileID: 0}
+  UIText: {fileID: 0}
+  sprite: {fileID: 1981522097}
+  textMeshText: {fileID: 0}
+  valueFrom: 0
+  valueTo: 0.85
+  time: 1.5
+  delay: 0
+  easeType: 1
+  callback:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2141792986}
+        m_MethodName: ReadyToRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2141792984
 GameObject:
   m_ObjectHideFlags: 0
@@ -576,3 +639,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65b7856358bb44e7e96a986dc10b619a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OutroScreen: {fileID: 1981522099}
+  Text: {fileID: 1587572425}

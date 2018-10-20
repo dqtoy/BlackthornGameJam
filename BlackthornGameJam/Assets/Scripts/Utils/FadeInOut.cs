@@ -7,9 +7,13 @@ using DG.Tweening;
 
 public class FadeInOut : MonoBehaviour
 {
-
+    [Header("List Of Objects")]
     public Image BG;
-    public Text Text;
+    public Text UIText;
+    public SpriteRenderer sprite;
+    public TMPro.TextMeshPro textMeshText;
+
+    [Header("Config Data")]
     public float valueFrom;
     public float valueTo;
     public float time = 1.5f;
@@ -34,8 +38,12 @@ public class FadeInOut : MonoBehaviour
 
         if (BG != null)
             BG.color = new Color(BG.color.r, BG.color.g, BG.color.b, progress);
-        if (Text != null)
-            Text.color = new Color(Text.color.r, Text.color.g, Text.color.b, progress);
+        if (UIText != null)
+            UIText.color = new Color(UIText.color.r, UIText.color.g, UIText.color.b, progress);
+        if (sprite != null)
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, progress);
+        if (textMeshText != null)
+            textMeshText.color = new Color(textMeshText.color.r, textMeshText.color.g, textMeshText.color.b, progress);
     }
 
     public void Play()

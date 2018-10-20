@@ -107,6 +107,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
 
         if (win)
             StartCoroutine(PrepareForNextMiniGame());
+        else StartCoroutine(LoadLost());
     }
 
     IEnumerator PrepareForNextMiniGame()
