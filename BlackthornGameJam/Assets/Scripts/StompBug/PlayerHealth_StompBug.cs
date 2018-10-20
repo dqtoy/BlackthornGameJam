@@ -9,6 +9,9 @@ public class PlayerHealth_StompBug : SingletonBehaviour<PlayerHealth_StompBug> {
 
     public void UpdateHealth(int amount)
     {
+        if (Player_StompBug.Instance.IsDead())
+            return;
+        
         health += amount;
         if (health <= 0)
             Dead();
@@ -16,9 +19,8 @@ public class PlayerHealth_StompBug : SingletonBehaviour<PlayerHealth_StompBug> {
 
     private void Dead()
     {
-        Debug.Log("Dead");
-        return;
+        Player_StompBug.Instance.Dead();
         if (shake != null)
-            shake.Shake(0.5f, 0.25f);
+            shake.Shake(0.05f, 0.2f);
     }
 }

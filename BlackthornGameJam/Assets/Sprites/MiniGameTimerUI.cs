@@ -47,6 +47,7 @@ public class MiniGameTimerUI : SingletonBehaviour<MiniGameTimerUI> {
         timerGoing = false;
         timeLeft = 0;
         UpdateUI();
+        textMeshPro.gameObject.SetActive(false);
     }
 
     public void ResetTimer(float seconds)
@@ -60,5 +61,6 @@ public class MiniGameTimerUI : SingletonBehaviour<MiniGameTimerUI> {
     {
         timerGoing = true;
         startTime = System.DateTime.Now;
+        textMeshPro.gameObject.SetActive(true);
     }
 }

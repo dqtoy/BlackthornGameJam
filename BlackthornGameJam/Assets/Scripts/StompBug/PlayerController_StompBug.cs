@@ -38,6 +38,11 @@ public class PlayerController_StompBug : MonoBehaviour {
 		transform.Translate (velocity);
 	}
 
+    public void MoveIgnoreCollision(Vector3 velocity)
+    {
+        transform.Translate(velocity);
+    }
+
 	void HorizontalCollisions(ref Vector3 velocity) {
 		float directionX = Mathf.Sign (velocity.x);
 		float rayLength = Mathf.Abs (velocity.x) + skinWidth;

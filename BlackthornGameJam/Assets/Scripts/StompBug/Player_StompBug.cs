@@ -3,13 +3,14 @@ using System.Collections;
 using UnityEngine.UI;
 
 [RequireComponent (typeof (PlayerController_StompBug))]
-public class Player_StompBug : MonoBehaviour {
+public class Player_StompBug : SingletonBehaviour<Player_StompBug> {
 
 	[Header ("Moving and Jumping")]
 	public float jumpHeight = 4;
 	public float timeToJumpApex = .4f;
 	public float moveSpeed = 6;
-	
+
+    private Vector2 deltaMovement;
     private float accelerationTimeAirborne = .4f;
 	private float accelerationTimeGrounded = .2f;
 	private float gravity;
@@ -20,6 +21,7 @@ public class Player_StompBug : MonoBehaviour {
     private PlayerController_StompBug controller;
 	private Animator anim;
 
+    private bool isDead = false;
 	private bool facingRight = true;
 	private bool doubleJump = false;
     private bool isRunning = false;
@@ -56,7 +58,10 @@ public class Player_StompBug : MonoBehaviour {
         jumpNum = maxJumpNum;
 	}
 
-	void Update() {
+	void Update() 
+    {
+        HandleInput();
+        UpdateMovement();
 
 		// detects when on the ground
 		if (controller.collisions.below) {
@@ -80,38 +85,62 @@ public class Player_StompBug : MonoBehaviour {
 			foot = true;
 		}
 
-		// detects if the player is holding the arrow keys to move
-		Vector2 input = new Vector2 (Input.GetAxisRaw ("Horizontal"), Input.GetAxisRaw ("Vertical"));
-		Flip(input);
+
+	}
+
+    /// <summary>
+    /// Handles the input. 
+    /// calculate deltaMovement used for UpdateMovement
+    /// </summary>
+    private void HandleInput()
+    {
+        deltaMovement = Vector2.zero;
+
+        // detects if the player is holding the arrow keys to move
+        if (!isDead)
+        {
+            deltaMovement = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+            // jump and double jump and triple jump
+            if (Input.GetKey(KeyCode.Space) && controller.collisions.below)
+            {
+                Jump();
+            }
+            /*
+            if (Input.GetKeyDown(KeyCode.Space) && doubleJump == false && !controller.collisions.below){
+                velocity.y = jumpVelocity;
+                jumpNum--;
+                if(jumpNum <= 0){
+                    doubleJump = true;
+                }
+            } 
+            */
+        }
+    }
 
 
+    /// <summary>
+    /// Updates the movement using deltaMovement calculated every frame
+    /// </summary>
+    private void UpdateMovement()
+    {
+        Flip(deltaMovement);
 
-		// jump and double jump and triple jump
-        if (Input.GetKey(KeyCode.Space) && controller.collisions.below){
-            Jump();
-		}
-        /*
-        if (Input.GetKeyDown(KeyCode.Space) && doubleJump == false && !controller.collisions.below){
-			velocity.y = jumpVelocity;
-			jumpNum--;
-			if(jumpNum <= 0){
-				doubleJump = true;
-			}
-		} 
-		*/
-	
+        // handles moving and physics for jumping
+        float targetVelocityX = deltaMovement.x * moveSpeed;
+        velocity.x = Mathf.SmoothDamp(velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below) ? accelerationTimeGrounded : accelerationTimeAirborne);
+        velocity.y += gravity * Time.deltaTime;
 
+        if (isDead)
+        {
+            controller.MoveIgnoreCollision(velocity * Time.deltaTime);
+            return;
+        }
+         
+               
 
-		// handles moving and physics for jumping
-		float targetVelocityX = input.x * moveSpeed;
-		velocity.x = Mathf.SmoothDamp (velocity.x, targetVelocityX, ref velocityXSmoothing, (controller.collisions.below)?accelerationTimeGrounded:accelerationTimeAirborne);
-		velocity.y += gravity * Time.deltaTime;
-		controller.Move (velocity * Time.deltaTime);
-
-
-
-
-        isRunning = (input.x != 0);
+        controller.Move(velocity * Time.deltaTime);
+        isRunning = (deltaMovement.x != 0);
         anim.SetBool("isRunning", isRunning);
 
         isOnGround = controller.collisions.below;
@@ -120,8 +149,7 @@ public class Player_StompBug : MonoBehaviour {
         {
             //UpdateTrailEffect(); 
         }
-
-	}
+    }
 
 
 
@@ -130,6 +158,18 @@ public class Player_StompBug : MonoBehaviour {
      * Actions
      * 
      *****************************************/
+
+    public void Dead()
+    {
+        if (isDead)
+            return;
+        
+        velocity = new Vector2(-jumpVelocity / 8, jumpVelocity / 2);
+        //anim.SetBool("isDead", true);
+        //anim.Play("Dead");
+        controller.collisions.below = false;
+        isDead = true;
+    }
 
     private void Jump()
     {
@@ -184,6 +224,20 @@ public class Player_StompBug : MonoBehaviour {
         if (damageEffect != null)
             Instantiate(damageEffect, transform.position, Quaternion.identity);
 	}
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DeadZone"))
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
+    }
 
 
 
