@@ -82,7 +82,7 @@ public class GameManager_SmashpBug : MiniGameManagerBase {
             Transform spawnLocation = data.fromLeft ? leftGroundSpawn : rightGroundSpawn;
             GameObject bug = Instantiate(groundBugPrefab, spawnLocation.position, Quaternion.identity);
             Bug bugCtrl = bug.GetComponent<Bug>();
-            bugCtrl.health = data.health;
+            bugCtrl.Init(data);
             BossBug bossBugCtrl = bug.GetComponent<BossBug>();
             bossBugCtrl.Init(data.health);
         }
@@ -117,5 +117,16 @@ public class GameManager_SmashpBug : MiniGameManagerBase {
         int health = Mathf.Min(2 + level, 15);
         bugs.Add(new BugData(1.0f, 1, false, false, (Random.value > 0.5f), health));
 
+        ApplyRandomColor();
+
+    }
+
+    private void ApplyRandomColor()
+    {
+        for (int i = 0; i < bugs.Count; i++)
+        {
+            BugData data = bugs[i];
+            data.bugColor = BugColoring.Instance.GetRandomColor();
+        }
     }
 }

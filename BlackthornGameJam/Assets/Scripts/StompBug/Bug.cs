@@ -10,6 +10,7 @@ public class BugData
     public bool flying;
     public bool fromLeft;
     public int health;
+    public BugColor bugColor;
 
     public BugData(float spawnTime, float speed, bool jumping = false, bool flying = false, bool fromLeft = false, int health = 1)
     {
@@ -23,13 +24,29 @@ public class BugData
 }
 
 public class Bug : MonoBehaviour {
-    
+
+    public SpriteRenderer spriteRender;
     public int health;
-    public Color color;
     public GameObject deathEffect;
     public GameObject attackedEffect;
 
-    public void TakeDamage(int damage) {
+    private BugData bugData;
+    private Color color;
+
+    public void Init(BugData bugData)
+    {
+        this.bugData = bugData;
+        Color modifiedColor;
+        Sprite colorSprite = BugColoring.Instance.GetSpriteByType(bugData.bugColor, out modifiedColor);
+        if (colorSprite != null)
+        {
+            spriteRender.sprite = colorSprite;
+            color = modifiedColor;
+        }
+        health = bugData.health;
+    }
+
+	public void TakeDamage(int damage) {
         //if (attackedEffect != null)
         //    Instantiate(attackedEffect, transform.position, Quaternion.identity);
         health -= damage;

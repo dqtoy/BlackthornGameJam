@@ -84,6 +84,8 @@ public class GameManager_StompBug : MiniGameManagerBase {
         {
             Transform spawnLocation = data.fromLeft ? leftGroundSpawn : rightGroundSpawn;
             GameObject bug = Instantiate(groundBugPrefab, spawnLocation.position, Quaternion.identity);
+            Bug bugCtrl = bug.GetComponent<Bug>();
+            bugCtrl.Init(data);
             LinearMove movementCtrl = bug.GetComponent<LinearMove>();
             movementCtrl.Init(data.fromLeft, data.speed);
         }
@@ -91,6 +93,8 @@ public class GameManager_StompBug : MiniGameManagerBase {
         {
             Transform spawnLocation = data.fromLeft ? leftAirSpawn : rightAirSpawn;
             GameObject bug = Instantiate(airBugPrefab, spawnLocation.position, Quaternion.identity);
+            Bug bugCtrl = bug.GetComponent<Bug>();
+            bugCtrl.Init(data);
             SineMove movementCtrl = bug.GetComponent<SineMove>();
             movementCtrl.Init(data.fromLeft, data.speed, spawnLocation.position.y, -1, -1);
         }
@@ -191,5 +195,16 @@ public class GameManager_StompBug : MiniGameManagerBase {
             }
         }
 
+        ApplyRandomColor();
+
+    }
+
+    private void ApplyRandomColor()
+    {
+        for (int i = 0; i < bugs.Count; i++)
+        {
+            BugData data = bugs[i];
+            data.bugColor = BugColoring.Instance.GetRandomColor();
+        }
     }
 }

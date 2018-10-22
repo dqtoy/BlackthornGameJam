@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6c5475fce38f4283bb91f15c8edc025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRender: {fileID: 212520781327201240}
   health: 1
-  color: {r: 0.909804, g: 0.3529412, b: 0.6, a: 1}
   deathEffect: {fileID: 1508210277340606, guid: 1d1647b4463694e7f9b364dce84507e8,
     type: 2}
   attackedEffect: {fileID: 1556804200157028, guid: 13ecee50d5c2b4a318cc605222adee69,
