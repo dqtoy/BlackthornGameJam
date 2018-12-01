@@ -18,11 +18,13 @@ public class BugCountManager : SingletonBehaviour<BugCountManager> {
 	private void OnEnable()
     {
         BugUtils.OnBugKilled += UpdateCount;
+        BugUtils.OnBugPainted += UpdateCount;
     }
 
     private void OnDisable()
     {
         BugUtils.OnBugKilled -= UpdateCount;
+        BugUtils.OnBugPainted -= UpdateCount;
     }
 
     private void UpdateCount()

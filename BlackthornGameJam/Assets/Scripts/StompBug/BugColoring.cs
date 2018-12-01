@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum BugColor
 {
-    Red, Blue, Green, Cyan, Purple
+    White = -1, Red, Blue, Green, Cyan, Purple
 }
 
 [System.Serializable]
@@ -37,7 +37,21 @@ public class BugColoring : SingletonBehaviour<BugColoring> {
     public BugColor GetRandomColor()
     {
         System.Array bugColors = System.Enum.GetValues(typeof(BugColor));
-        BugColor bugColor = (BugColor)bugColors.GetValue(UnityEngine.Random.Range(0, bugColors.Length));
+        BugColor bugColor = (BugColor)bugColors.GetValue(UnityEngine.Random.Range(0, bugColors.Length - 1));
+        return bugColor;
+    }
+
+    public BugColor GetRandomPrimaryColor()
+    {
+        System.Array bugColors = System.Enum.GetValues(typeof(BugColor));
+        BugColor bugColor = (BugColor)bugColors.GetValue(UnityEngine.Random.Range(0, 3));
+        return bugColor;
+    }
+
+    public BugColor GetRandomSecondaryColor()
+    {
+        System.Array bugColors = System.Enum.GetValues(typeof(BugColor));
+        BugColor bugColor = (BugColor)bugColors.GetValue(UnityEngine.Random.Range(3, 5));
         return bugColor;
     }
 }

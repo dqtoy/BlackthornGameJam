@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SmashBug.unity
     guid: 802cfd5f2bcea4fd0b5631ddacc1442d
+  - enabled: 1
+    path: Assets/Scenes/PaintBug.unity
+    guid: 648028ee9a50e480288de26171edf63a
   m_configObjects: {}

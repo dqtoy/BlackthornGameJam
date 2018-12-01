@@ -10,8 +10,7 @@ public class MiniGameTimerUI : SingletonBehaviour<MiniGameTimerUI> {
     private float timeLeft;
     private System.DateTime startTime;
     private bool timerGoing;
-
-
+    private float accelerateTime = 0.1f;
 
 
     public delegate void TimeUp();

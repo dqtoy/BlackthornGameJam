@@ -10,7 +10,7 @@ public enum GameState
 
 public enum MiniGame
 {
-    StompBug = 0, SmashBug, Pain, Piano
+    StompBug = 0, SmashBug, PaintBug, Piano
 }
 
 
@@ -20,7 +20,7 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     public MiniGameManagerBase currentGame;
 
     private int currentLevel;
-    private const int miniGameNum = 3;
+    private const int miniGameNum = 4;
     private int[] miniLevels;
 
 	private void Start()
@@ -66,7 +66,9 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
     /// </summary>
     private void PlayMiniGame()
     {
-        int miniGameIndex = Random.Range(0, 2);
+        int miniGameIndex = Random.Range(0, 3);
+        if (currentLevel < 6)
+            miniGameIndex = Random.Range(0, 2);
         miniLevels[miniGameIndex]++;
         currentLevel++;
         switch(miniGameIndex)
@@ -76,6 +78,9 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
                 break;
             case 1:
                 SceneManager.LoadScene("SmashBug", LoadSceneMode.Additive);
+                break;
+            case 2:
+                SceneManager.LoadScene("PaintBug", LoadSceneMode.Additive);
                 break;
         }
     }
@@ -91,11 +96,11 @@ public class MainGameManager : SingletonBehaviour<MainGameManager> {
             case MiniGame.SmashBug:
                 sceneName = "SmashBug";
                 break;
-            case MiniGame.Pain:
-                sceneName = "StompBug";
+            case MiniGame.PaintBug:
+                sceneName = "PaintBug";
                 break;
             case MiniGame.Piano:
-                sceneName = "StompBug";
+                sceneName = "Pinao";
                 break;
         }
 

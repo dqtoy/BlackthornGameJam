@@ -21,6 +21,11 @@ public class BugData
         this.fromLeft = fromLeft;
         this.health = health;
     }
+
+    public BugData(BugColor bugColor)
+    {
+        this.bugColor = bugColor;
+    }
 }
 
 public class Bug : MonoBehaviour {
